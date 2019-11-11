@@ -1,0 +1,25 @@
+{
+  "name": "myblog",
+  "version": "1.0.0",
+  "description": "That's my first real web application that I will test my knoweledge, learn, improove, and, above all, have lots of fun!",
+  "main": "app.js",
+  "dependencies": {
+    "ejs": "^2.7.1",
+    "express": "^4.17.1",
+    "nodemon": "^1.19.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CaioJrVS/MyBlog.git"
+  },
+  "author": "Caio Junior Viana Souza",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CaioJrVS/MyBlog/issues"
+  },
+  "homepage": "https://github.com/CaioJrVS/MyBlog#readme"
+}
