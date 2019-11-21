@@ -1,0 +1,15 @@
+<% include partials/header %>
+
+<div id="text-area" class="container bg-white rounded">
+<div id="editor"></div>
+
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+
+<script>
+  var quill = new Quill('#editor', {
+    theme: 'snow'
+  });
+</script>
+
+</div>
+<% include partials/footer %>

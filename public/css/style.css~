@@ -1,0 +1,29 @@
+body{
+    background: url('/static/images/hubbleLover.jpg') center center no-repeat fixed;
+    background-size:cover;
+}
+.login-box{
+    padding-top:400px;
+    background-color:#ffffffb8;
+    margin:auto;
+    width:350px;
+    border-radius:1%;
+}
+.body{
+    font-family:'Montserrat',cursive;
+}
+#brand{
+    font-family:'Pacifico',cursive;
+    font-size: 1.5em;
+    color:white;
+}
+#login-btn{
+    background-color:#8f18ad5e;
+    border-color:white;
+    border-radius:3%;
+}
+#text-area{
+    height:500px;
+    width:750px;
+    padding-top:5px;
+}
