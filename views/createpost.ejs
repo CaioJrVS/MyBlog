@@ -1,23 +1,13 @@
 <% include partials/header %>
 
-<div id="text-area" class="container bg-white rounded">
-<div id="editor"></div>
-
-<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+<div class="container bg-white rounded">
+    <form action="/createpost" style="padding-top:10px;" method="POST">
+	<textarea name="content" id="myEditor" style="padding-top:10px;"></textarea>
+	<button class = "btn btn-danger" style="margin-top:10px; margin-bottom: 10px;">Submit</button>
+    </form>
+</div>
 
 <script>
-var quill = new Quill('#editor-container', {
-  modules: {
-    toolbar: [
-      [{ header: [1, 2, false] }],
-      ['bold', 'italic', 'underline'],
-      ['image', 'code-block']
-    ]
-  },
-  placeholder: 'Compose an epic...',
-  theme: 'snow'  // or 'bubble'
-});
+ var editor = new FroalaEditor('#myEditor', { language: 'pt_br' });
 </script>
-
-</div>
 <% include partials/footer %>
