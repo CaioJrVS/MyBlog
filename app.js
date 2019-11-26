@@ -17,14 +17,16 @@ app.post('/createpost', (req, res)=>{
     var content ={title:entities.decode(req.body.title),
 		  author:req.body.author,
 		  post:entities.decode(req.body.content)
-		 }
+		 };
     db.none('INSERT INTO posts(author,title,post) VALUES ($1,$2,$3)',[content.author, content.title, content.post])
 	.then(()=>{
-	    console.log("foi")})
+	    console.log("foi");
+	    res.redirect('/');
+	})
 	.catch(error=>{
-	    console.log(error)});
+	    console.log(error);
+	});
 	     
-    res.redirect('/');
 });
 
 app.get('/createpost',(req,res)=>{
