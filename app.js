@@ -12,11 +12,15 @@ app.set('view engine','ejs');
 app.get('/',(req,res)=> res.render('index'));
 
 app.post('/createpost', (req, res)=>{
+    console.log(req.body);
     console.log(entities.decode(req.body.content));
     res.redirect('/');
 });
 
 app.get('/createpost',(req,res)=>{
     res.render('createpost');
+});
+app.get('*', (req,res) =>{
+    res.render('Oops');
 });
 app.listen(port, ()=>console.log(`App listening on ${port}`) );

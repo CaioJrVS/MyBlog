@@ -1,0 +1,7 @@
+<% include partials/header %>
+<div class="container bg-white" style="padding: auto;">
+    <h1> Oops não há nada aqui </h1>
+    <a href="/"> Retornar ao inicio</a>
+</div>
+
+<% include partials/footer %>
