@@ -1,3 +1,4 @@
+
 const express = require ('express');
 const app = express();
 const port = process.env.PORT | 3000;
@@ -14,7 +15,6 @@ app.set('view engine','ejs');
 app.get('/',(req,res)=>{
     db.any('SELECT * FROM posts')
 	.then(data=>{
-	    console.log(typeof(data[0].post));
 	    res.render('index.ejs',{data:data});
 	});
        });

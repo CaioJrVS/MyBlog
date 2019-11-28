@@ -1,5 +1,14 @@
 <% include partials/header %>
 <div class="container">
-    <div class="login-box"></div>
+	<div class="container rounded" style="width:75%;">
+	    <% for (var i = 0; i < data.length; i++){ %>
+	    <% var title= data[i].title %>
+		<div class = "container bg-white my-2 rounded">
+		    <h1><%= title %></h1>
+		    <h3> <%= data[i].author %> </h3>
+		</div>
+	<% } %>
+
+    </div>
 </div>
 <% include partials/footer %>
