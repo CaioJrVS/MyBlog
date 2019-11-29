@@ -21,7 +21,6 @@ app.get('/',(req,res)=>{
 
 app.get('/posts/:id',(req,res)=>{
     let postId = req.params.id; 
-    console.log(typeof(postId));
     db.one('SELECT * FROM posts WHERE id = $1', [postId])
 	.then(data =>{
 	    res.render('post',{data,data});

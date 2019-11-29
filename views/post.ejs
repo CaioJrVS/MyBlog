@@ -1,6 +1,16 @@
 <% include partials/header %>
-<div class="container bg-white rounded" style="width = 75%;">
+<div class="container bg-white rounded" style="width = 75%; font-family: 'Source Sans Pro', sans-serif;">
     <h2><%= data.title %></h2>  
-    <div id ="content"><%= data.post %></div>
+    <div id ="content" style="font-size:large;"><%= data.post%></div>
 </div>
+
+<script>
+ window.onload = ()=>{
+     let parser = new DOMParser();
+     let str  = document.getElementById('content').innerText;
+     let doc = parser.parseFromString(str,"text/html");
+     document.getElementById('content').innerHTML= doc.body.innerHTML;
+     }
+</script>
+
 <% include partials/footer %>
