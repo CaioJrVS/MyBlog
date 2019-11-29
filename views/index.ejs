@@ -1,12 +1,13 @@
 <% include partials/header %>
 <div class="container">
 	<div class="container rounded" style="width:75%;">
-	    <% for (var i = 0; i < data.length; i++){ %>
-	    <% var title= data[i].title %>
+	    <% for (var i = data.length-1; i >=0; i--){ %>
+	    <a style="text-decoration:none; color:#444;" href="http://localhost:3000/posts/<%= i+1 %>">
 		<div class = "container bg-white my-2 rounded">
-		    <h1><%= title %></h1>
+		    <h1><%= data[i].title %></h1>
 		    <h3> <%= data[i].author %> </h3>
 		</div>
+	    </a>
 	<% } %>
 
     </div>

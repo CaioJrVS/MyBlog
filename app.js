@@ -1,7 +1,7 @@
 
 const express = require ('express');
 const app = express();
-const port = process.env.PORT ;
+const port = process.env.PORT | 3000;
 const Entities = require('html-entities').AllHtmlEntities;
 const entities = new Entities();
 const pgp = require('pg-promise')();
@@ -19,6 +19,17 @@ app.get('/',(req,res)=>{
 	});
        });
 
+app.get('/posts/:id',(req,res)=>{
+    let postId = req.params.id; 
+    console.log(typeof(postId));
+    db.one('SELECT * FROM posts WHERE id = $1', [postId])
+	.then(data =>{
+	    res.render('post',{data,data});
+	}).catch(error=>{
+	    console.log(error);
+	    res.redirect('/');
+	    });
+});
 app.post('/createpost', (req, res)=>{
     
     var content ={title:entities.decode(req.body.title),
