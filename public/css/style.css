@@ -4,7 +4,7 @@ body{
 }
 .login-box{
     padding-top:400px;
-    background-color:#ffffffb8;
+    background:#ffffffb8;
     margin:auto;
     width:350px;
     border-radius:1%;
@@ -12,6 +12,11 @@ body{
 .body{
     font-family:'Montserrat',cursive;
 }
+
+#post-content{
+    background:#ffffffe8;
+}
+
 #brand{
     font-family:'Pacifico',cursive;
     font-size: 1.5em;

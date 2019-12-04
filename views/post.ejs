@@ -1,9 +1,12 @@
 <% include partials/header %>
-<div class="container bg-white rounded" style="width = 75%; font-family: 'Source Sans Pro', sans-serif;">
-    <h2><%= data.title %></h2>  
-    <div id ="content" style="font-size:large;"><%= data.post%></div>
+<div id="post-content" class="container rounded"; font-family: 'Source Sans Pro', sans-serif;">
+    <div  style="width:82%; margin:auto; padding-top:15px; padding-bottom: 15px;">
+	<h2><%= data.title %></h2>  
+	<div id="content" style="font-size:large;">
+	    <%= data.post%>
+	</div>
+    </div>
 </div>
-
 <script>
  window.onload = ()=>{
      let parser = new DOMParser();
