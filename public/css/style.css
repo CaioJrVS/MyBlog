@@ -1,7 +1,6 @@
 body{
     background: url('/static/images/hubbleLover.jpg') center center no-repeat fixed;
-    background-size: 100% auto;
-    background-repeat: no-repeat;
+    background-size:cover;
 }
 .login-box{
     padding-top:400px;
