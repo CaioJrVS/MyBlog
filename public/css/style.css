@@ -13,7 +13,7 @@ body{
     font-family:'Montserrat',cursive;
 }
 
-#post-content{
+.post-content{
     background:#ffffffe8;
 }
 

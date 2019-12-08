@@ -1,17 +1,15 @@
 <% include partials/header %>
-<div class="container">
-    <div class="row">
-	<div class="container-fluid rounded col-md" style="width:75%; font-family: 'Source Sans Pro', sans-serif;">
-	    <% for (var i = data.length-1; i >=0; i--){ %>
-	    <a style="text-decoration:none; color:#444;" href="posts/<%= i+1 %>">
-		<div class = "container bg-white my-2 rounded">
-		    <h1 style="font-size:3.5em;"><%= data[i].title %></h1>
-		    <h3> <%= data[i].author %> </h3>
-		</div>
-	    </a>
-	<% } %>
 
-	</div>
-    </div>
+    <div class="container rounded w-75" style="font-family: 'Source Sans Pro', sans-serif;">
+	<% for (var i = data.length-1; i >=0; i--){ %>
+	<a style="text-decoration:none; color:#444;" href="posts/<%= i+1 %>">
+	    <div class = "post-content container w-75 my-2 rounded">
+		<h1 style="font-size:3.5em;"><%= data[i].title %></h1>
+		<h3> <%= data[i].author %> </h3>
+	    </div>
+	</a>
+    <% } %>
 </div>
+
 <% include partials/footer %>
+* 
