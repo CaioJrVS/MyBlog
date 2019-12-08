@@ -16,7 +16,10 @@ body{
 .post-content{
     background:#ffffffe8;
 }
+.post-presenting{
+    width:75%!important;
 
+}
 #brand{
     font-family:'Pacifico',cursive;
     font-size: 1.5em;
@@ -34,4 +37,11 @@ body{
 }
 #editor {
     height:89%;
+}
+
+
+@media (max-width: 575.98px){
+    .post-presenting{
+	width:100%!important;
+    }
 }
