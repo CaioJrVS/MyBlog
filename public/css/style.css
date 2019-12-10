@@ -1,5 +1,5 @@
 body{
-    background: url('/static/images/hubbleLover.jpg') center center no-repeat fixed;
+    background: url('/static/images/hubbleLover01.jpg') center center no-repeat fixed;
     background-size:cover;
 }
 .login-box{
@@ -37,6 +37,13 @@ body{
 }
 #editor {
     height:89%;
+}
+#main-post{
+    background:url('https://images.unsplash.com/photo-1505238680356-667803448bb6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80') center center no-repeat scroll;
+}
+#bg-img-description{
+    max-width:100%;
+    max-height:100%;
 }
 
 
