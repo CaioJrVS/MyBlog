@@ -9,7 +9,7 @@ const entities = new Entities();
 
 // ------ Adding DataBase ------
 const pgp = require('pg-promise')();
-const db = pgp('postgres://prdflpvx:HzV-125bjDp9z2bMWl1D_gDulDJqij9-@tuffi.db.elephantsql.com:5432/prdflpvx');
+const db = pgp('postgres://prdflpvx:@tuffi.db.elephantsql.com:5432/prdflpvx');
 
 // ------ Configuring middlewares  
 app.use('/static',express.static('public'));
