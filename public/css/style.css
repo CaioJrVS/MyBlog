@@ -5,7 +5,7 @@ html, body{
 
 body{
     background: url('/static/images/hubbleLover01.jpg') center center no-repeat fixed;
-    background-size:cover;
+    background-size: auto;
 }
 
 .login-box{
