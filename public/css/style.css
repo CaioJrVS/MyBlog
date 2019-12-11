@@ -29,6 +29,12 @@ body{
 
 }
 
+.animated{
+    position:relative;
+    animation-name:appear;
+    animation-duration:3s;
+}
+
 #brand{
     font-family:'Pacifico',cursive;
     font-size: 1.5em;
@@ -72,4 +78,10 @@ body{
     #nasa-logo{
 	max-height:120px;
     }
+}
+
+@keyframes appear{
+    from{right:175px; opacity:0;}
+    to{right:0px; opacity:1;}
+
 }
