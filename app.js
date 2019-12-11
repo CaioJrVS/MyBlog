@@ -1,7 +1,7 @@
 // ------ Adding express -------
 const express = require ('express');
 const app = express();
-const port = process.env.PORT ;
+const port = process.env.PORT | 3000;
 
 // ------ Package to decode special characters ----- 
 const Entities = require('html-entities').AllHtmlEntities;
@@ -9,7 +9,7 @@ const entities = new Entities();
 
 // ------ Adding DataBase ------
 const pgp = require('pg-promise')();
-const db = pgp('postgres://prdflpvx:@tuffi.db.elephantsql.com:5432/prdflpvx');
+const db = pgp('postgres://prdflpvx:HzV-125bjDp9z2bMWl1D_gDulDJqij9-@tuffi.db.elephantsql.com:5432/prdflpvx');
 
 // ------ Configuring middlewares  
 app.use('/static',express.static('public'));

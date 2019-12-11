@@ -1,7 +1,13 @@
+html, body{
+    height:100%;
+    margin:0;
+}
+
 body{
     background: url('/static/images/hubbleLover01.jpg') center center no-repeat fixed;
     background-size:cover;
 }
+
 .login-box{
     padding-top:400px;
     background:#ffffffb8;
@@ -9,6 +15,7 @@ body{
     width:350px;
     border-radius:1%;
 }
+
 .body{
     font-family:'Montserrat',cursive;
 }
@@ -16,39 +23,53 @@ body{
 .post-content{
     background:#ffffffe8;
 }
+
 .post-presenting{
     width:75%!important;
 
 }
+
 #brand{
     font-family:'Pacifico',cursive;
     font-size: 1.5em;
     color:white;
 }
+
 #login-btn{
     background-color:#8f18ad5e;
     border-color:white;
     border-radius:3%;
 }
+
 #text-area{
     height:500px;
     width:750px;
     padding-top:10px;
 }
+
 #editor {
     height:89%;
 }
+
 #main-post{
     background:url('https://images.unsplash.com/photo-1505238680356-667803448bb6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80') center center no-repeat scroll;
 }
-#bg-img-description{
-    max-width:100%;
-    max-height:100%;
-}
 
+#bg-img-description{
+    height:100%;
+}
+#nasa-logo{
+    height:187px;
+    margin-top:30px;
+    width:auto;
+}
 
 @media (max-width: 575.98px){
     .post-presenting{
 	width:100%!important;
+    }
+
+    #nasa-logo{
+	max-height:120px;
     }
 }
