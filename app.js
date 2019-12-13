@@ -21,17 +21,17 @@ app.set('view engine','ejs');
 app.get('/',(req,res)=>{
     db.any('SELECT * FROM posts')
 	.then(data=>{
-	    res.render('index.ejs',{data:data});
+	    res.render('index',{data:data});
 	});
 });
 
 app.get('/login', (req,res) =>{
-    res.render('login.ejs');
+    res.render('login');
 });
 
 app.post('/login', (req,res) =>{
     console.log(req.body);
-    res.redirect('login.ejs');
+    res.redirect('login');
 });
 
 app.get('/posts/:id',(req,res)=>{
