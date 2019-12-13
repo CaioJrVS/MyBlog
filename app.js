@@ -26,12 +26,12 @@ app.get('/',(req,res)=>{
 });
 
 app.get('/login', (req,res) =>{
-    res.render('login');
+    res.render('login.ejs');
 });
 
 app.post('/login', (req,res) =>{
     console.log(req.body);
-    res.redirect('login');
+    res.redirect('login.ejs');
 });
 
 app.get('/posts/:id',(req,res)=>{
