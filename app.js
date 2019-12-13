@@ -25,6 +25,15 @@ app.get('/',(req,res)=>{
 	});
 });
 
+app.get('/login', (req,res) =>{
+    res.render('login');
+});
+
+app.post('/login', (req,res) =>{
+    console.log(req.body);
+    res.redirect('login');
+});
+
 app.get('/posts/:id',(req,res)=>{
     let postId = req.params.id; 
     db.one('SELECT * FROM posts WHERE id = $1', [postId])
@@ -64,5 +73,6 @@ app.get('/createpost',(req,res)=>{
 app.get('*', (req,res) =>{
     res.render('Oops');
 });
+
 
 app.listen(port, ()=>console.log(`App listening on ${port}`) );
