@@ -11,13 +11,18 @@ const entities = new Entities();
 const pgp = require('pg-promise')();
 const db = pgp('postgres://prdflpvx:HzV-125bjDp9z2bMWl1D_gDulDJqij9-@tuffi.db.elephantsql.com:5432/prdflpvx');
 
+// ------ Bcrypt for password hashing --------
+const bcrypt = require('bcryptjs');
+let salt = bcrypt.genSaltSync(10);
+
 // ------ Configuring middlewares  
 app.use('/static',express.static('public'));
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.set('view engine','ejs');
 
-// ------ Routes ( Create Routes folder and exports here ) ----
+// ------ Routes ---- ? Create Routes folder and exports here ---- ? How to send parameters for modules outside the app.js?
+
 app.get('/',(req,res)=>{
     db.any('SELECT * FROM posts')
 	.then(data=>{
@@ -30,7 +35,11 @@ app.get('/login', (req,res) =>{
 });
 
 app.post('/login', (req,res) =>{
-    console.log(req.body);
+    let user = {
+	email: bcrypt.hashSync( req.body.loginPassword, salt ),
+	password: req.body.loginEmail
+    };
+    console.log (user);
     res.redirect('login');
 });
 

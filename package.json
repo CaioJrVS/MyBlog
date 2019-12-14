@@ -4,6 +4,7 @@
   "description": "That's my first real web application that I will test my knoweledge, learn, improove, and, above all, have lots of fun!",
   "main": "app.js",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "ejs": "^2.7.1",
     "express": "^4.17.1",
     "html-entities": "^1.2.1",
