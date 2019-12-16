@@ -17,7 +17,14 @@
 	    </div>
 	</form>
     </div>
-    <a id="no-login" class="btn bg-rounded bg-warning mt-1 mx-auto" >Não possui login? Clique aqui</a>
+    <div class="cotainer d-flex flex-column align-items-center">
+	<% if (passDontMatch){ %>
+
+	    <h4 class="text-danger" >As senhas não são identicas!! Tente o login novamente.</h4>
+
+	<% } %>
+    </div>
+	<a id="no-login" class= "btn bg-rounded bg-warning mt-1 mx-auto">Não possui login? Clique aqui</a>
 </div>
 <script>
 
@@ -37,9 +44,11 @@
 	<div class="form-group">
 	    <label class="text-white" for="password">Senha</label>
 	    <input name="loginPassword" type="password" class="form-control">
+	</div>
+	    
 	<div class="form-group">
 	    <label class="text-white" for="confpass">Confirme sua Senha</label>
-	    <input name="loginPassword" type="confpass" class="form-control">
+	    <input name="loginPassword" type="password" class="form-control">
 	</div>
 	<button type="submit" class="btn btn-primary">Submit</button>
 	<div id="sign-in-div" class="container-fluid">
@@ -52,7 +61,7 @@
      }else{
 	 
 	 document.getElementById('userforms').innerHTML = `
-	 <form method="POST" action="/login">
+	<form method="POST" action="/login">
 	<div class="form-group">
 	    <label class="text-white" for="email">E-mail</label>
 	    <input name="loginEmail" type="email" class="form-control">
@@ -72,22 +81,6 @@
      }
      signin = !signin
  });
- 
- 
- /* var atag = document.getElementById('no-login');
-  * atag.addEventListener('click',()=>{
-  * function ajaxLogin() {
-  *  var xhttp = new XMLHttpRequest();
-  *  xhttp.onreadystatechange = function() {
-  *    if (this.readyState == 4 && this.status == 200) {
-  *      document.getElementById("userforms").innerHTML =
-  *      this.responseText;
-  *    }
-  *  };
-  *     xhttp.open("GET", "signin" , true);
-  *     xhttp.send();
-  * }  
-  * }); */
  
 </script>
 <% include partials/footer %>

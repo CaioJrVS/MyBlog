@@ -30,8 +30,9 @@ app.get('/',(req,res)=>{
 	});
 });
 
-app.get('/login', (req,res) =>{
-    res.render('login');
+app.get('/login/:signinattempt', (req,res) =>{
+    let passDontMatch = (req.params.signinattempt == 'true');
+    res.render('login', {passDontMatch: passDontMatch});
 });
 
 app.post('/login', (req,res) =>{
@@ -39,19 +40,49 @@ app.post('/login', (req,res) =>{
 	password:req.body.loginPassword,
 	email: req.body.loginEmail
     };
-    db.any('SELECT * FROM bloguser WHERE useremail= $1',[userlogin.email])
+    db.one('SELECT * FROM bloguser WHERE useremail= $1',[userlogin.email])
     	.then((data)=>{
 	    if( bcrypt.compareSync(userlogin.password, data[0].passhash)){
 		console.log("você está logado mané");
+		//Logar o usuário e manter logado
 	    };
 	    if(!bcrypt.compareSync(req.body.loginPassword, data[0].passhash)){
 		console.log("senha errada vagabundo");
+		//Redirecionar para login e dizer que a senha está errada
 	    };
     	})
     	.catch(()=>{
 	    console.log("Você não possui cadastro");
+	    // Dizer que não possui conta
     	});
-    res.redirect('login');
+    res.redirect('login/false');
+});
+
+app.post('/signin',(req,res) => {
+    let userSignin = {
+	email: req.body.loginEmail,
+	password: req.body.loginPassword
+    };
+    if ( userSignin.password[0] == userSignin.password[1] ){
+	db.one('SELECT * FROM bloguser WHERE useremail= $1',[userSignin.email])
+	    .then((data) => {
+		console.log(data);
+		console.log("ja possui conta");
+		res.redirect('login/false');
+		// Redirecionar para Login e Dizer que já possui conta!
+	    })
+	    .catch(() => {
+		console.log ("não possui conta");
+		res.redirect('login/false');
+		// Enviar email de confirmação
+		// Criar Usuário e dizer que foi criado com sucesso
+		// Redirecionar para a página de Login
+		// Mater o Usuário logado
+	    });
+    }
+    if ( userSignin.password[0] != userSignin.password[1]){
+	res.redirect('login/true'); // Alterar o parametro da URL para receber não apenas true ou false 
+    }
 });
 
 app.get('/posts/:id',(req,res)=>{
