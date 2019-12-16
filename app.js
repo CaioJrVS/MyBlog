@@ -35,11 +35,22 @@ app.get('/login', (req,res) =>{
 });
 
 app.post('/login', (req,res) =>{
-    let user = {
-	email: bcrypt.hashSync( req.body.loginPassword, salt ),
-	password: req.body.loginEmail
+    let userlogin = {
+	password:req.body.loginPassword,
+	email: req.body.loginEmail
     };
-    console.log (user);
+    db.any('SELECT * FROM bloguser WHERE useremail= $1',[userlogin.email])
+    	.then((data)=>{
+	    if( bcrypt.compareSync(userlogin.password, data[0].passhash)){
+		console.log("você está logado mané");
+	    };
+	    if(!bcrypt.compareSync(req.body.loginPassword, data[0].passhash)){
+		console.log("senha errada vagabundo");
+	    };
+    	})
+    	.catch(()=>{
+	    console.log("Você não possui cadastro");
+    	});
     res.redirect('login');
 });
 
@@ -63,7 +74,6 @@ app.post('/createpost', (req, res)=>{
 	post:   entities.decode(req.body.content)
 
     };
-
     db.none('INSERT INTO posts(author,title,post) VALUES ($1,$2,$3)',[content.author, content.title, content.post])
 	.then(()=>{
 	    console.log("foi");

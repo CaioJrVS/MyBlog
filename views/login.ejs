@@ -1,17 +1,94 @@
 <% include  partials/header %>
+<div class = "container-fluid text-blue d-flex flex-column">
+    <div id="userforms" class= "container d-flex justify-content-center align-content-center">
+	<form method="POST" action="/login">
+	    <div class="form-group">
+		<label class="text-white" for="email">E-mail</label>
+		<input name="loginEmail" type="email" class="form-control">
+	    </div>
+	    <div class="form-group">
+		<label class="text-white" for="password">Senha</label>
+		<input name="loginPassword"type="password" class="form-control">
+	    </div>
+	    <button type="submit" class="btn btn-primary">Submit</button>
+	    <div id="sign-in-div" class="container-fluid">
+	    </div>
+	    <div class="container-fluid">
+	    </div>
+	</form>
+    </div>
+    <a id="no-login" class="btn bg-rounded bg-warning mt-1 mx-auto" >Não possui login? Clique aqui</a>
+</div>
+<script>
 
-<div class= "container d-flex justify-content-center align-content-center">
-    <form method="POST" action="/login">
+ var signin = true;
+ var content = document.getElementById('userforms').innerHTML;
+ var atag = document.getElementById('no-login');
+ atag.addEventListener('click', ()=>{
+     console.log(signin);
+     if (signin){
+	 
+	 document.getElementById('userforms').innerHTML = `
+    <form method="POST" action="/signin">
 	<div class="form-group">
 	    <label class="text-white" for="email">E-mail</label>
-	    <input name="loginEmail "type="email" class="form-control">
+	    <input name="loginEmail" type="email" class="form-control">
 	</div>
 	<div class="form-group">
-	    <label class="text-white" for="password">Password</label>
+	    <label class="text-white" for="password">Senha</label>
+	    <input name="loginPassword" type="password" class="form-control">
+	<div class="form-group">
+	    <label class="text-white" for="confpass">Confirme sua Senha</label>
+	    <input name="loginPassword" type="confpass" class="form-control">
+	</div>
+	<button type="submit" class="btn btn-primary">Submit</button>
+	<div id="sign-in-div" class="container-fluid">
+	</div>
+	<div class="container-fluid">
+	</div>
+    </form>
+	 `
+	 document.getElementById('no-login').innerText ="Já possui login? Clique aqui!";
+     }else{
+	 
+	 document.getElementById('userforms').innerHTML = `
+	 <form method="POST" action="/login">
+	<div class="form-group">
+	    <label class="text-white" for="email">E-mail</label>
+	    <input name="loginEmail" type="email" class="form-control">
+	</div>
+	<div class="form-group">
+	    <label class="text-white" for="password">Senha</label>
 	    <input name="loginPassword"type="password" class="form-control">
 	</div>
 	<button type="submit" class="btn btn-primary">Submit</button>
+	<div id="sign-in-div" class="container-fluid">
+	</div>
+	<div class="container-fluid">
+	</div>
     </form>
-</div>
-
+	 `
+	 document.getElementById('no-login').innerText ="Não possui login? Clique aqui!";
+     }
+     signin = !signin
+ });
+ 
+ 
+ /* var atag = document.getElementById('no-login');
+  * atag.addEventListener('click',()=>{
+  * function ajaxLogin() {
+  *  var xhttp = new XMLHttpRequest();
+  *  xhttp.onreadystatechange = function() {
+  *    if (this.readyState == 4 && this.status == 200) {
+  *      document.getElementById("userforms").innerHTML =
+  *      this.responseText;
+  *    }
+  *  };
+  *     xhttp.open("GET", "signin" , true);
+  *     xhttp.send();
+  * }  
+  * }); */
+ 
+</script>
 <% include partials/footer %>
+
