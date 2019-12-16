@@ -15,10 +15,24 @@ const db = pgp('postgres://prdflpvx:HzV-125bjDp9z2bMWl1D_gDulDJqij9-@tuffi.db.el
 const bcrypt = require('bcryptjs');
 let salt = bcrypt.genSaltSync(10);
 
-// ------ Configuring middlewares  
+// ------ Passport for login authorization ------
+const section = require('express-section');
+
+// ------ Configuring middlewares
+
+// - Middleware to serve static files (css, js, images) -
 app.use('/static',express.static('public'));
+
+// - Middleware to parse body parameters -
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
+
+// - Middleware for passport auth -
+app.use(session({secret:'Coffee lake'}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+// setting view engine
 app.set('view engine','ejs');
 
 // ------ Routes ---- ? Create Routes folder and exports here ---- ? How to send parameters for modules outside the app.js?
