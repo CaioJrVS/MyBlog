@@ -46,30 +46,35 @@ app.set('view engine','ejs');
 
 // - Middleware for passport auth -
 
+// Setting session paramaters ( THIS ONE SHOULD BE CALLED BEFORE passport.session()
+
 app.use(session({secret:'Coffee lake',
      resave: false,
      saveUninitialized:false
     }));
 
+// Auth middlewares
+
 app.use(passport.initialize());
 app.use(passport.session());
 
+// Logic to the cookie information to keep user loged in 
 
 passport.serializeUser(function(user, done){
-    console.log('serializou');
     done(null, user.id);
 });
 
 passport.deserializeUser(( id ,done ) =>{
     db.one('SELECT * FROM bloguser WHERE userid = $1 ', [id])
 	.then((data)=>{
-	    console.log('deserializou');
 	    done(null,data);
 	})
 	.catch((err)=>{
 	    console.log(err);
 	})
 });
+
+// - Local Strategy for authentication -
 
 passport.use(new LocalStrategy({
 
@@ -97,6 +102,8 @@ passport.use(new LocalStrategy({
 	  });
     } 
 ));
+
+// Logic to authorize access only if the user is loged in 
 
 const isAuthenticated = function(req,res,next){
    if(req.user)
