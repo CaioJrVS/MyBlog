@@ -7,33 +7,103 @@ const port = process.env.PORT ;
 const Entities = require('html-entities').AllHtmlEntities;
 const entities = new Entities();
 
+
+
 // ------ Adding DataBase ------
 const pgp = require('pg-promise')();
 const db = pgp('postgres://prdflpvx:HzV-125bjDp9z2bMWl1D_gDulDJqij9-@tuffi.db.elephantsql.com:5432/prdflpvx');
+
+
 
 // ------ Bcrypt for password hashing --------
 const bcrypt = require('bcryptjs');
 let salt = bcrypt.genSaltSync(10);
 
+
+
 // ------ Passport for login authorization ------
-const section = require('express-section');
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
+const session = require("express-session");
+
+
 
 // ------ Configuring middlewares
 
+
 // - Middleware to serve static files (css, js, images) -
 app.use('/static',express.static('public'));
+
+
 
 // - Middleware to parse body parameters -
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
+// setting view engine
+app.set('view engine','ejs');
+
+
 // - Middleware for passport auth -
-app.use(session({secret:'Coffee lake'}));
+
+app.use(session({secret:'Coffee lake',
+     resave: false,
+     saveUninitialized:false
+    }));
+
 app.use(passport.initialize());
 app.use(passport.session());
 
-// setting view engine
-app.set('view engine','ejs');
+
+passport.serializeUser(function(user, done){
+    console.log('serializou');
+    done(null, user.id);
+});
+
+passport.deserializeUser(( id ,done ) =>{
+    db.one('SELECT * FROM bloguser WHERE userid = $1 ', [id])
+	.then((data)=>{
+	    console.log('deserializou');
+	    done(null,data);
+	})
+	.catch((err)=>{
+	    console.log(err);
+	})
+});
+
+passport.use(new LocalStrategy({
+
+    usernameField: 'loginEmail',
+    passwordField: 'loginPassword',
+    },
+
+    function(username, password, done) {
+      db.one('SELECT * FROM bloguser WHERE useremail = $1',[username])
+	  .then((data)=>{
+	      bcrypt.compare(password, data.passhash).then((res) =>{
+		  if(res){
+		      console.log(' senha e usuario ok!');
+		      return done ( null, { id: data.userid });
+		  };
+		  if(!res){
+		      console.log('usuario ok senha errada');
+		      return done (null, false, {message: 'Incorrect Password'});
+		  };
+	      }); 
+	  })
+	    .catch((err)=>{
+		console.log('usuario não existe');
+	      return done (null, false, {message: 'Incorrect user' });
+	  });
+    } 
+));
+
+const isAuthenticated = function(req,res,next){
+   if(req.user)
+      return next();
+   else
+       res.redirect('/');
+};
 
 // ------ Routes ---- ? Create Routes folder and exports here ---- ? How to send parameters for modules outside the app.js?
 
@@ -44,33 +114,18 @@ app.get('/',(req,res)=>{
 	});
 });
 
+
+
 app.get('/login/:signinattempt', (req,res) =>{
     let passDontMatch = (req.params.signinattempt == 'true');
     res.render('login', {passDontMatch: passDontMatch});
 });
 
-app.post('/login', (req,res) =>{
-    let userlogin = {
-	password:req.body.loginPassword,
-	email: req.body.loginEmail
-    };
-    db.one('SELECT * FROM bloguser WHERE useremail= $1',[userlogin.email])
-    	.then((data)=>{
-	    if( bcrypt.compareSync(userlogin.password, data[0].passhash)){
-		console.log("você está logado mané");
-		//Logar o usuário e manter logado
-	    };
-	    if(!bcrypt.compareSync(req.body.loginPassword, data[0].passhash)){
-		console.log("senha errada vagabundo");
-		//Redirecionar para login e dizer que a senha está errada
-	    };
-    	})
-    	.catch(()=>{
-	    console.log("Você não possui cadastro");
-	    // Dizer que não possui conta
-    	});
-    res.redirect('login/false');
-});
+
+
+app.post('/login', passport.authenticate('local', { failureRedirect:'/login/true', successRedirect:'/'} ));
+
+
 
 app.post('/signin',(req,res) => {
     let userSignin = {
@@ -99,6 +154,8 @@ app.post('/signin',(req,res) => {
     }
 });
 
+
+
 app.get('/posts/:id',(req,res)=>{
     let postId = req.params.id; 
     db.one('SELECT * FROM posts WHERE id = $1', [postId])
@@ -109,6 +166,8 @@ app.get('/posts/:id',(req,res)=>{
 	    res.redirect('/');
 	    });
 });
+
+
 
 app.post('/createpost', (req, res)=>{
     
@@ -130,13 +189,19 @@ app.post('/createpost', (req, res)=>{
 	     
 });
 
-app.get('/createpost',(req,res)=>{
+
+
+app.get('/createpost', isAuthenticated , (req, res)=>{
     res.render('createpost');
 });
+
+
 
 app.get('*', (req,res) =>{
     res.render('Oops');
 });
+
+
 
 
 app.listen(port, ()=>console.log(`App listening on ${port}`) );
