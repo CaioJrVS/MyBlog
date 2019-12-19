@@ -4,84 +4,18 @@
 	<form method="POST" action="/login">
 	    <div class="form-group">
 		<label class="text-white" for="email">E-mail</label>
-		<input name="loginEmail" type="email" class="form-control">
+		<input name="loginEmail" type="email" class="form-control required">
 	    </div>
 	    <div class="form-group">
 		<label class="text-white" for="password">Senha</label>
-		<input name="loginPassword"type="password" class="form-control">
+		<input name="loginPassword"type="password" class="form-control required">
 	    </div>
 	    <button type="submit" class="btn btn-primary">Submit</button>
-	    <div id="sign-in-div" class="container-fluid">
-	    </div>
 	    <div class="container-fluid">
 	    </div>
 	</form>
     </div>
-    <div class="cotainer d-flex flex-column align-items-center">
-	<% if (passDontMatch){ %>
-
-	    <h4 class="text-danger" >As senhas não são identicas!! Tente o login novamente.</h4>
-
-	<% } %>
-    </div>
-	<a id="no-login" class= "btn bg-rounded bg-warning mt-1 mx-auto">Não possui login? Clique aqui</a>
+    <a id="no-login" href="/signin" class= "btn bg-rounded btn-warning mt-1 mx-auto px-6">Não possui login?</a>
 </div>
-<script>
-
- var signin = true;
- var content = document.getElementById('userforms').innerHTML;
- var atag = document.getElementById('no-login');
- atag.addEventListener('click', ()=>{
-     console.log(signin);
-     if (signin){
-	 
-	 document.getElementById('userforms').innerHTML = `
-    <form method="POST" action="/signin">
-	<div class="form-group">
-	    <label class="text-white" for="email">E-mail</label>
-	    <input name="loginEmail" type="email" class="form-control">
-	</div>
-	<div class="form-group">
-	    <label class="text-white" for="password">Senha</label>
-	    <input name="loginPassword" type="password" class="form-control">
-	</div>
-	    
-	<div class="form-group">
-	    <label class="text-white" for="confpass">Confirme sua Senha</label>
-	    <input name="loginPassword" type="password" class="form-control">
-	</div>
-	<button type="submit" class="btn btn-primary">Submit</button>
-	<div id="sign-in-div" class="container-fluid">
-	</div>
-	<div class="container-fluid">
-	</div>
-    </form>
-	 `
-	 document.getElementById('no-login').innerText ="Já possui login? Clique aqui!";
-     }else{
-	 
-	 document.getElementById('userforms').innerHTML = `
-	<form method="POST" action="/login">
-	<div class="form-group">
-	    <label class="text-white" for="email">E-mail</label>
-	    <input name="loginEmail" type="email" class="form-control">
-	</div>
-	<div class="form-group">
-	    <label class="text-white" for="password">Senha</label>
-	    <input name="loginPassword"type="password" class="form-control">
-	</div>
-	<button type="submit" class="btn btn-primary">Submit</button>
-	<div id="sign-in-div" class="container-fluid">
-	</div>
-	<div class="container-fluid">
-	</div>
-    </form>
-	 `
-	 document.getElementById('no-login').innerText ="Não possui login? Clique aqui!";
-     }
-     signin = !signin
- });
- 
-</script>
 <% include partials/footer %>
 

@@ -38,11 +38,11 @@ body{
 #brand{
     font-family:'Pacifico',cursive;
     font-size: 1.5em;
-    color:white;
+    color:#5b15c7;
 }
 
 #login-btn{
-    background-color:#8f18ad5e;
+    background-color:#5b15c7;
     border-color:white;
     border-radius:3%;
 }

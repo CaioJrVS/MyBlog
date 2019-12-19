@@ -46,7 +46,7 @@ app.set('view engine','ejs');
 
 // - Middleware for passport auth -
 
-// Setting session paramaters ( THIS ONE SHOULD BE CALLED BEFORE passport.session()
+// Setting session paramaters ( THIS ONE SHOULD BE CALLED BEFORE passport.session() )
 
 app.use(session({secret:'Coffee lake',
      resave: false,
@@ -113,7 +113,7 @@ const isAuthenticated = function(req,res,next){
 };
 
 // ------ Routes ---- ? Create Routes folder and exports here ---- ? How to send parameters for modules outside the app.js?
-
+ 
 app.get('/',(req,res)=>{
     db.any('SELECT * FROM posts')
 	.then(data=>{
@@ -123,40 +123,48 @@ app.get('/',(req,res)=>{
 
 
 
-app.get('/login/:signinattempt', (req,res) =>{
-    let passDontMatch = (req.params.signinattempt == 'true');
-    res.render('login', {passDontMatch: passDontMatch});
+app.get('/login', (req,res) =>{
+    res.render('login');
 });
 
 
 
-app.post('/login', passport.authenticate('local', { failureRedirect:'/login/true', successRedirect:'/'} ));
+app.post('/login', passport.authenticate('local', { failureRedirect:'/login', successRedirect:'/'} ));
 
-
+app.get('/signin', (req, res) =>{ res.render('signin') });
 
 app.post('/signin',(req,res) => {
-    let userSignin = {
+    let user = {
 	email: req.body.loginEmail,
 	password: req.body.loginPassword
     };
-    if ( userSignin.password[0] == userSignin.password[1] ){
-	db.one('SELECT * FROM bloguser WHERE useremail= $1',[userSignin.email])
+
+    // Caso as senhas enviadas sejam iguais,
+    // verifica se o usuário já está cadastrado e se já possui conta..
+    // Caso contrário retorna o usuário para a pagina de signin com o erro
+    
+    
+    if ( user.password[0] == user.password[1] ){
+	
+	db.one('SELECT * FROM bloguser WHERE useremail= $1',[user.email])
 	    .then((data) => {
-		console.log(data);
 		console.log("ja possui conta");
 		res.redirect('login/false');
 		// Redirecionar para Login e Dizer que já possui conta!
 	    })
-	    .catch(() => {
-		console.log ("não possui conta");
-		res.redirect('login/false');
+	    .catch((err) => {
+		var hash = bcrypt.hashSync(user.password[0], salt);
+		db.none('INSERT INTO bloguser(useremail, passhash, salt) VALUES ($1, $2, $3)',[user.email, hash, salt])
+		    .then((data)=>{
+			res.redirect('login/false');
+		    });
 		// Enviar email de confirmação
 		// Criar Usuário e dizer que foi criado com sucesso
 		// Redirecionar para a página de Login
 		// Mater o Usuário logado
 	    });
     }
-    if ( userSignin.password[0] != userSignin.password[1]){
+    if ( user.password[0] != user.password[1]){
 	res.redirect('login/true'); // Alterar o parametro da URL para receber não apenas true ou false 
     }
 });
