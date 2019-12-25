@@ -1,11 +1,7 @@
 html, body{
     height:100%;
     margin:0;
-}
-
-body{
-    background: url('/static/images/hubbleLover01.jpg') center center no-repeat fixed;
-    background-size: auto;
+    height:0;
 }
 
 .login-box{
@@ -16,6 +12,12 @@ body{
     border-radius:1%;
 }
 
+.bg-purple{
+    background-color:#5b15c7;
+}
+.bg-pink{
+    background-color:#b515c7;
+}
 .body{
     font-family:'Montserrat',cursive;
 }
@@ -29,20 +31,14 @@ body{
 
 }
 
-.animated{
-    position:relative;
-    animation-name:appear;
-    animation-duration:3s;
-}
-
 #brand{
     font-family:'Pacifico',cursive;
     font-size: 1.5em;
-    color:#5b15c7;
 }
 
 #login-btn{
-    background-color:#5b15c7;
+    color:#5b15c7;
+    background-color:white;
     border-color:white;
     border-radius:3%;
 }

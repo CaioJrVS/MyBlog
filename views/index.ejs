@@ -1,10 +1,30 @@
 <% include partials/header %>
 
-    <div  class="post-presenting container " style="font-family: 'Source Sans Pro', sans-serif;">
+    <div  class="post-presenting container mt-3" style="font-family: 'Source Sans Pro', sans-serif;">
+	<a style="text-decoration:none; color:#444;" href="posts/<%= i+1 %>">
+	    <div  class = "border border-primary post-presenting post-content container mt-1 mb-4 rounded p-0" style="background-color:#00000017">
+		<div id="main-post" class="post-content justify-content-center text-center d-flex flex-column rounded-top" style="height:180px;"> 
+		    <h1 class="m-1" style="font-family: 'Source Sans Pro', sans-serif; color:oldlace;">MINHA PRIMEIRA APLICAÇÃO WEB</h1>
+		</div>
+		<div class="p-2">
+		    <p>Essa é a minha primeira aplicação WEB, onde desenvolvo este site, que é um blog, com funcionalidade de criar e apresentar posts. A principal intenção com esse projeto é criar conteudos descrevendo passo a passo de como fiz meus projetos.</p>
+		    <p>
+			Nesse blog utilizo as seguintes tecnolgias e frameworks:
+			<ul>
+			    <li>Node.js para o back end com Express;</li>
+			    <li>Plain CSS, Jscript, HTML e Bootstrap para o front end;</li>
+			    <li>ElephantSQL (PostgreSQL na núvem) para o banco de dados integrado no servidor;</li>
+			    <li>Heroku (uma plataforma cloud para hostear o servidor);</li>
+			</ul>
+			
+		    </p>
+		</div>
+	    </div>
+	</a>
+
 	<% for (var i = data.length-1; i >=0; i--){ %>
 	<a style="text-decoration:none; color:#444;" href="posts/<%= i+1 %>">
-	    <div  class = " post-presenting post-content container mt-1 mb-4 rounded p-0">
-
+	    <div  class = "border border-primary post-presenting post-content container mt-1 mb-4 rounded p-0" style="background-color:#00000017">
 		<div id="main-post" class="post-content justify-content-center text-center d-flex flex-column rounded-top" style="height:180px;"> 
 		    <h1 class="m-1" style="font-family: 'Source Sans Pro', sans-serif; color:oldlace;">MINHA PRIMEIRA APLICAÇÃO WEB</h1>
 		</div>
@@ -24,17 +44,6 @@
 	    </div>
 	</a>
     <% } %>
-</div>
-<div id="bg-img-description" class="container-fluid d-flex">
-    <div class="animated container d-flex flex-column justify-content-end" style="padding-bottom:15px;">
-	<div style="justify-content:center; align-items:center;">
-	    <img id ="nasa-logo" style="height:187px; margin-top:30px; width:auto;" src="https://www.nasa.gov/sites/default/files/thumbnails/image/nasa-logo-web-rgb.png">
-	</div>
-	<div style=" font-family: 'Roboto', sans-serif;">
-	    <h3 class="text-light">Foto tirada pelo telescópio Hubble.</h3>
-	    <p class="text-light">The Bubble Nebula (NGC 7635) é uma esfera de gás sendo soprada no espaço por uma estrela super quente e massiva que possui 45 vezes a massa do Sol. (link para a imagem: <a href="https://hubblesite.org/image/3849/wallpaper">Nasa</a>) </p>
-	</div>
-    </div>
 </div>
 <% include partials/footer %>
  
