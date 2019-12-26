@@ -22,20 +22,24 @@
 	<!--ADDING WYSIWYG-->
 	<link href='https://cdn.jsdelivr.net/npm/froala-editor@3.0.6/css/froala_editor.pkgd.min.css' rel='stylesheet' type='text/css' />
 	<script type='text/javascript' src='https://cdn.jsdelivr.net/npm/froala-editor@3.0.6/js/froala_editor.pkgd.min.js'></script>
-
+	
     </head>
-        <body class="body">
-	  <nav class = "navbar bg-purple navbar-expand-md">
-	    <div class="container">
-	    <a class="nav-brand text-white" id = "brand" style="" href="/">Caio's Blog</a>
+    <body class="body">
+      <nav class = "navbar bg-purple navbar-expand-lg">
+	<div class="container row m-auto">
+	  <div class="col d-flex justify-content-center">
+	      <a class="navbar-brand text-white" id = "brand" style="" href="/">Caio's Blog</a>
+	  </div>
+	  <div class="col d-flex justify-content-center">
+	    <i class="fas fa-laptop-code" style="font-size:2em;color:#ffc641"></i>
+	  </div>
+	  <div class="col d-flex justify-content-center">
 	    <div>
-	      <i class="fas fa-rocket text-white" style="font-size:1.5em;"></i>
+	      <a id="login-btn" class="btn mr-2 font-weight-bolder" href="contact">Contact</a>
 	    </div>
 	    <div>
-	      <form method="GET" action="/login">
-		
-		<button id="login-btn"class="btn font-weight-bolder">Login</button>
-	      </form>
+		<a id="login-btn"class="btn font-weight-bolder" href="login">Login</a>
 	    </div>
-	    </div>
-	</nav>
+	  </div>
+	</div>
+      </nav>
