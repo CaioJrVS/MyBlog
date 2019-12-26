@@ -121,7 +121,9 @@ app.get('/',(req,res)=>{
 	});
 });
 
-
+app.get("/contact", (req, res) =>{
+    res.render('contact');
+});
 
 app.get('/login', (req,res) =>{
     res.render('login');
@@ -131,7 +133,9 @@ app.get('/login', (req,res) =>{
 
 app.post('/login', passport.authenticate('local', { failureRedirect:'/login', successRedirect:'/'} ));
 
+
 app.get('/signin', (req, res) =>{ res.render('signin') });
+
 
 app.post('/signin',(req,res) => {
     let user = {

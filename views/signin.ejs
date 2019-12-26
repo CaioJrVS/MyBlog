@@ -1,6 +1,6 @@
 <% include partials/header %>
 
-<div class = "container-fluid text-dark d-flex flex-column">
+<div class = "container-fluid text-dark d-flex flex-column mt-3">
     <div id="userforms" class= "container d-flex justify-content-center align-content-center">
 	<form method="POST" action="/signin">
 	    <div class="form-group">
@@ -23,5 +23,7 @@
 	    </div>
 	</form>
     </div>
-
-<% include partials/footer %>
+</div>
+<div class="position-absolute p-0 container-fluid" style ="bottom:0">
+    <% include partials/footer %>
+</div>
