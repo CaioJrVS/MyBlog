@@ -1,7 +1,7 @@
 // ------ Adding express -------
 const express = require ('express');
 const app = express();
-const port = process.env.PORT ;
+const port = 3001;
 
 // ------ Package to decode special characters ----- 
 const Entities = require('html-entities').AllHtmlEntities;
